@@ -26,6 +26,7 @@ app.get('/', (req, res) => {
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cyf7w.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
+
   const aPositiveCollection = client.db("bloodCell").collection("aPositiveCollection");
   const aNegativeCollection = client.db("bloodCell").collection("aNegativeCollection");
   const bPositiveCollection = client.db("bloodCell").collection("bPositiveCollection");
@@ -38,7 +39,7 @@ client.connect(err => {
 
   // Add A Positive Blood Group In Database 
 
-  app.post('/aPositive', (req, res) => {
+  app.post('/addAPositive', (req, res) => {
     const name = req.body.name;
     const mobile = req.body.mobile;
     const address = req.body.address;
@@ -52,9 +53,19 @@ client.connect(err => {
   });
 
 
+  // Get A Positive Blood Group Data From Database
+
+  app.get('/getAPositive', (req, res) => {
+    aPositiveCollection.find()
+      .toArray((err, items) => {
+        res.send(items)
+      })
+  });
+
+
   // Add A Negative Blood Group In Database 
 
-  app.post('/aNegative', (req, res) => {
+  app.post('/addANegative', (req, res) => {
     const name = req.body.name;
     const mobile = req.body.mobile;
     const address = req.body.address;
@@ -67,10 +78,18 @@ client.connect(err => {
       });
   });
 
+  // Get A Negative Blood Group Data From Database 
+
+  app.get('getANegative', (req, res) => {
+    aNegativeCollection.find()
+      .toArray((err, items) => {
+        res.send(items)
+      })
+  });
 
   // Add B Positive Blood Group In Database 
 
-  app.post('/bPositive', (req, res) => {
+  app.post('/addBPositive', (req, res) => {
     const name = req.body.name;
     const mobile = req.body.mobile;
     const address = req.body.address;
@@ -83,10 +102,18 @@ client.connect(err => {
       });
   });
 
+  // Get B Positive Blood Group Data From Database
+
+  app.get('/getBPositive', (req, res) => {
+    bPositiveCollection.find()
+      .toArray((err, items) => {
+        res.send(items)
+      })
+  });
 
   // Add B Negative Blood Group In Database 
 
-  app.post('/bNegative', (req, res) => {
+  app.post('/addBNegative', (req, res) => {
     const name = req.body.name;
     const mobile = req.body.mobile;
     const address = req.body.address;
@@ -99,10 +126,9 @@ client.connect(err => {
       });
   });
 
-
   // Add O Positive Blood Group In Database 
 
-  app.post('/oPositive', (req, res) => {
+  app.post('/addOPositive', (req, res) => {
     const name = req.body.name;
     const mobile = req.body.mobile;
     const address = req.body.address;
@@ -115,10 +141,9 @@ client.connect(err => {
       });
   });
 
-
   // Add O Negative Blood Group In Database 
 
-  app.post('/oNegative', (req, res) => {
+  app.post('/addONegative', (req, res) => {
     const name = req.body.name;
     const mobile = req.body.mobile;
     const address = req.body.address;
@@ -131,10 +156,9 @@ client.connect(err => {
       });
   });
 
-
   // Add AB Positive Blood Group In Database 
 
-  app.post('/abPositive', (req, res) => {
+  app.post('/addABPositive', (req, res) => {
     const name = req.body.name;
     const mobile = req.body.mobile;
     const address = req.body.address;
@@ -147,10 +171,9 @@ client.connect(err => {
       });
   });
 
-
   // Add AB Negative Blood Group In Database 
 
-  app.post('/abNegative', (req, res) => {
+  app.post('/addABNegative', (req, res) => {
     const name = req.body.name;
     const mobile = req.body.mobile;
     const address = req.body.address;
@@ -162,12 +185,6 @@ client.connect(err => {
         console.log("AB Negative Blood Group Added")
       });
   });
-
-
-
-
-
-
 
 
   console.log("Database Connection Successfully");
