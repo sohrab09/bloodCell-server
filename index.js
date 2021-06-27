@@ -221,6 +221,15 @@ client.connect(err => {
       });
   });
 
+  // Get AB Negative Blood Group Data From Database
+
+  app.get('/getABNegative', (req, res) => {
+    abNegativeCollection.find()
+      .toArray((err, items) => {
+        res.send(items)
+      })
+  });
+
 
   console.log("Database Connection Successfully");
 });
