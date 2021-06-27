@@ -62,7 +62,6 @@ client.connect(err => {
       })
   });
 
-
   // Add A Negative Blood Group In Database 
 
   app.post('/addANegative', (req, res) => {
@@ -76,15 +75,6 @@ client.connect(err => {
         res.send(result.insertedCount > 0);
         console.log("A Negative Blood Group Added")
       });
-  });
-
-  // Get A Negative Blood Group Data From Database 
-
-  app.get('getANegative', (req, res) => {
-    aNegativeCollection.find()
-      .toArray((err, items) => {
-        res.send(items)
-      })
   });
 
   // Add B Positive Blood Group In Database 
@@ -141,6 +131,15 @@ client.connect(err => {
       });
   });
 
+    // Get O Positive Blood Group Data From Database
+
+    app.get('/getOPositive', (req, res) => {
+      oPositiveCollection.find()
+        .toArray((err, items) => {
+          res.send(items)
+        })
+    });
+
   // Add O Negative Blood Group In Database 
 
   app.post('/addONegative', (req, res) => {
@@ -170,6 +169,15 @@ client.connect(err => {
         console.log("AB Positive Blood Group Added")
       });
   });
+
+      // Get AB Positive Blood Group Data From Database
+
+      app.get('/getABPositive', (req, res) => {
+        abPositiveCollection.find()
+          .toArray((err, items) => {
+            res.send(items)
+          })
+      });
 
   // Add AB Negative Blood Group In Database 
 
