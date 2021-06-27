@@ -77,6 +77,15 @@ client.connect(err => {
       });
   });
 
+    // Get A Negative Blood Group Data From Database
+
+    app.get('/getANegative', (req, res) => {
+      aNegativeCollection.find()
+        .toArray((err, items) => {
+          res.send(items)
+        })
+    });
+
   // Add B Positive Blood Group In Database 
 
   app.post('/addBPositive', (req, res) => {
